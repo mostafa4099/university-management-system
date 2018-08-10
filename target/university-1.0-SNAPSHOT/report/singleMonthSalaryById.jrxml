@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="singleMonthSalaryById" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="711ee822-7529-429e-b8a4-eb9505534a46">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="empId" class="java.lang.String"/>
+	<parameter name="paymentMonth" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     salary_info.`salary_id` AS salary_info_salary_id,
+     salary_info.`emp_id` AS salary_info_emp_id,
+     salary_info.`basic` AS salary_info_basic,
+     salary_info.`house` AS salary_info_house,
+     salary_info.`helth` AS salary_info_helth,
+     salary_info.`transport` AS salary_info_transport,
+     salary_info.`festival` AS salary_info_festival,
+     salary_info.`others` AS salary_info_others,
+     salary_info.`total` AS salary_info_total,
+     salary_info.`payment_month` AS salary_info_payment_month,
+     salary_info.`pay_date` AS salary_info_pay_date,
+     emp_info.`emp_name` AS emp_info_emp_name
+FROM
+     `emp_info` emp_info INNER JOIN `salary_info` salary_info ON emp_info.`emp_id` = salary_info.`emp_id`
+WHERE
+ emp_info.emp_id = $P{empId}
+ AND payment_month = $P{paymentMonth}]]>
+	</queryString>
+	<field name="salary_info_salary_id" class="java.lang.Long"/>
+	<field name="salary_info_emp_id" class="java.lang.Long"/>
+	<field name="salary_info_basic" class="java.lang.Double"/>
+	<field name="salary_info_house" class="java.lang.Double"/>
+	<field name="salary_info_helth" class="java.lang.Double"/>
+	<field name="salary_info_transport" class="java.lang.Double"/>
+	<field name="salary_info_festival" class="java.lang.Double"/>
+	<field name="salary_info_others" class="java.lang.Double"/>
+	<field name="salary_info_total" class="java.lang.Double"/>
+	<field name="salary_info_payment_month" class="java.sql.Date"/>
+	<field name="salary_info_pay_date" class="java.sql.Date"/>
+	<field name="emp_info_emp_name" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="200" y="0" width="121" height="20" uuid="07b99e57-ab44-469e-ae6c-8ce6befe129f"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Salary Report]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="52" height="20" uuid="31087d29-6d50-4b40-8be5-a7dd058c3a94"/>
+				<text><![CDATA[Salary Id-]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="52" y="0" width="32" height="20" uuid="9623ffac-9942-4a6a-951a-9cd6739f5615"/>
+				<textFieldExpression><![CDATA[$F{salary_info_salary_id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="172" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="9219ca01-c0f9-427d-824f-c70d5a939263"/>
+				<text><![CDATA[Employee Id]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="20" uuid="d3f4356e-1dd1-482e-9dbe-eb220498945d"/>
+				<textFieldExpression><![CDATA[$F{salary_info_emp_id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="306" y="0" width="100" height="20" uuid="f6a307e8-fde4-4380-b6c6-aca6542e2811"/>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="406" y="0" width="149" height="20" uuid="40422b8c-9652-4012-bd0b-5ab89093dd6a"/>
+				<textFieldExpression><![CDATA[$F{emp_info_emp_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="100" height="20" uuid="bfc4b0d0-937c-4d75-b491-af5aa2874a3a"/>
+				<text><![CDATA[Basic]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="20" width="100" height="20" uuid="973af4d5-ebf2-436d-a0ec-77a7e6a7d499"/>
+				<textFieldExpression><![CDATA[$F{salary_info_basic}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="40" width="100" height="20" uuid="410c2568-5196-41e3-874e-e2998f0b37c3"/>
+				<text><![CDATA[House]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="40" width="100" height="20" uuid="6d544f0a-6602-4bd2-9983-16a46fe3f5fc"/>
+				<textFieldExpression><![CDATA[$F{salary_info_house}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="60" width="100" height="20" uuid="d70882f4-1fd1-47e8-aff1-25cd99c89286"/>
+				<text><![CDATA[Health]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="60" width="100" height="20" uuid="057e70bd-992d-42b5-a889-62b0d85bbdd3"/>
+				<textFieldExpression><![CDATA[$F{salary_info_helth}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="80" width="100" height="20" uuid="d1393486-5043-4935-af16-93439ffcf7fa"/>
+				<text><![CDATA[Transport]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="80" width="100" height="20" uuid="e8e5d6eb-7a45-4fe5-b628-663859edccd1"/>
+				<textFieldExpression><![CDATA[$F{salary_info_transport}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="100" width="100" height="20" uuid="aa2bcf29-9339-403a-9707-7035db6d1dfa"/>
+				<text><![CDATA[Festival]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="100" width="100" height="20" uuid="ac1ab517-0f11-49cd-b3e9-14a16f79680b"/>
+				<textFieldExpression><![CDATA[$F{salary_info_festival}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="120" width="100" height="20" uuid="e04a531b-9813-4147-99d9-72065d9ae62a"/>
+				<text><![CDATA[Others]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="120" width="100" height="20" uuid="bea1aeb5-0a7c-4cfe-ab89-984305cd097b"/>
+				<textFieldExpression><![CDATA[$F{salary_info_others}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy/MM/dd">
+				<reportElement x="406" y="20" width="149" height="20" uuid="035f7259-65c3-40b2-a9b7-69729eb4ef44"/>
+				<textFieldExpression><![CDATA[$F{salary_info_payment_month}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="306" y="20" width="100" height="20" uuid="b80d1a4f-4548-4f79-9d97-81361ed17fb2"/>
+				<text><![CDATA[Month]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="306" y="40" width="100" height="20" uuid="be83cdf2-bd2f-43d8-abe0-abe052886d65"/>
+				<text><![CDATA[Pay Date]]></text>
+			</staticText>
+			<textField pattern="yyyy/MM/dd">
+				<reportElement x="406" y="40" width="149" height="20" uuid="b20e7739-a0d7-4826-8018-fa1912f9c27e"/>
+				<textFieldExpression><![CDATA[$F{salary_info_pay_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="140" width="100" height="20" uuid="63ba41bf-b88d-4615-89e4-c9bce3d1bf02"/>
+				<textFieldExpression><![CDATA[$F{salary_info_total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="140" width="100" height="20" uuid="984f31a9-8c96-4eaa-b05d-fce7d9d707eb"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Total=]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="20" splitType="Stretch"/>
+	</columnFooter>
+</jasperReport>

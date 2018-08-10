@@ -1,0 +1,64 @@
+.msg-val {
+	color: red;
+}
+.msg-success {
+	color: green;
+}
+.footer{
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 10px;
+    border: 1px solid #DDD;
+    text-align: center;
+    background: #021221;
+    color: white;
+}
+
+.admin-footer{
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 10px;
+    border: 1px solid #DDD;
+    text-align: center;
+    color: #ffffff;
+}
+
+.mega-menu {
+    width: 800px; padding: 10px; overflow: hidden; text-align: center;
+}
+
+.meg-col-4{
+    width: 570px !important;
+}
+
+.meg-col-6{
+    width: 400px !important;
+}
+
+.mega-menu a{
+    text-decoration: none; color: cadetblue;
+}
+
+.sub-menu-heading{
+    color: darkcyan;
+}
+
+.insert_field{
+    color: #009999;
+}
+
+.td_border{
+    border: none !important;
+}
+
+@media(max-width: 500px){
+    .mega-menu{
+        width: 220px;
+    }
+    .meg-col-4{
+        width: 220px;
+    }
+    .meg-col-6{
+        width: 220px !important;
+    }
+}

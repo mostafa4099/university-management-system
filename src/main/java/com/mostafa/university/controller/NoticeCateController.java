@@ -1,0 +1,65 @@
+package com.mostafa.university.controller;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mostafa.university.domain.NoticeCategory;
+import com.mostafa.university.service.NoticeCateServiceInt;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.util.UriComponentsBuilder;
+
+@Controller
+@RequestMapping("/ncat")
+public class NoticeCateController {
+    
+    @Autowired
+    private NoticeCateServiceInt noticeCateServiceInt;
+    
+    @RequestMapping("/home")
+    public String home(){
+        return "notice_category_info";
+    }
+    
+    @RequestMapping(value = "/ncatlist", method = RequestMethod.GET)
+    @JsonIgnore
+    public ResponseEntity <List<NoticeCategory>> getAllObject(){
+        List <NoticeCategory> ncatList=noticeCateServiceInt.getAllObject();
+        return new ResponseEntity<List<NoticeCategory>>(ncatList, HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/ncatlist/{id}", method = RequestMethod.GET)
+    public ResponseEntity <NoticeCategory> getObjectById(@PathVariable("id") Integer id){
+        NoticeCategory nCategory=noticeCateServiceInt.getObjectById(id);
+        return new ResponseEntity<NoticeCategory>(nCategory, HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/ncatlist", method = RequestMethod.POST)
+    public ResponseEntity <Void> addObject(@RequestBody NoticeCategory nCategory, UriComponentsBuilder builder){
+        boolean flag=noticeCateServiceInt.addObject(nCategory);
+        if(flag == false){
+            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+        }
+        HttpHeaders headers=new HttpHeaders();
+        headers.setLocation(builder.path("/ncatlist/{id}").buildAndExpand(nCategory.getNcatId()).toUri());
+        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+    }
+    
+    @RequestMapping(value = "/ncatlist/{id}", method = RequestMethod.PUT)
+    public ResponseEntity <NoticeCategory> updateObject(@RequestBody NoticeCategory nCategory){
+        noticeCateServiceInt.updateObject(nCategory);
+        return new ResponseEntity<NoticeCategory>(nCategory, HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/ncatlist/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> deleteObject(@PathVariable("id") Integer id){
+        noticeCateServiceInt.deleteObject(id);
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+    }
+}
